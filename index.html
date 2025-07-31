@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accordéon Coloré : La Roue des Saveurs</title>
+    <title>Application : Saveurs & Recettes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -15,6 +15,22 @@
         .title {
             font-family: 'Playfair Display', serif;
         }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #6B4226;
+            border-bottom-color: #6B4226;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* Accordion Styles */
         .accordion-item-header {
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -31,7 +47,7 @@
             background-color: #ffffff;
         }
         .accordion-item.active .accordion-item-content {
-            max-height: 1000px; /* Should be larger than any possible content height */
+            max-height: 1000px;
             transition: max-height 1s ease-in-out, padding 0.5s ease;
             padding: 1.5rem;
         }
@@ -42,144 +58,226 @@
             transform: rotate(180deg);
         }
         
-        /* Harmonious Background Colors */
-        .bg-florales { background-color: #F1E4E8; } /* Soft Pink */
-        .bg-epicees { background-color: #FAE1D5; } /* Light Terracotta */
-        .bg-fruits { background-color: #FFE4E1; } /* Gentle Coral */
-        .bg-sucrees { background-color: #FFF4E6; } /* Creamy Vanilla */
-        .bg-noisettes { background-color: #F8F0E3; } /* Oat Beige */
-        .bg-grillees { background-color: #EAE3D9; } /* Muted Taupe */
-        .bg-vegetales { background-color: #E8F0E8; } /* Sage Green */
+        /* Harmonious Background Colors for Accordion */
+        .bg-florales { background-color: #F1E4E8; }
+        .bg-epicees { background-color: #FAE1D5; }
+        .bg-fruits { background-color: #FFE4E1; }
+        .bg-sucrees { background-color: #FFF4E6; }
+        .bg-noisettes { background-color: #F8F0E3; }
+        .bg-grillees { background-color: #EAE3D9; }
+        .bg-vegetales { background-color: #E8F0E8; }
+
+        /* Recipe Card Styles */
+        .recipe-card {
+            background-color: white;
+        }
+        .recipe-border-1 { border-left: 8px solid #A9C2E5; } /* Blue accent */
+        .recipe-border-2 { border-left: 8px solid #FAD2A1; } /* Warm Orange */
+        .recipe-border-3 { border-left: 8px solid #D8BFD8; } /* Gentle Purple */
+        .recipe-border-4 { border-left: 8px solid #B2DFDB; } /* Teal */
 
     </style>
 </head>
 <body class="bg-[#F8F5F2]">
 
-    <div class="container mx-auto px-4 py-12">
-        <header class="text-center mb-12">
-            <h1 class="title text-5xl md:text-7xl font-black text-[#6B4226]">La Roue des Saveurs</h1>
-            <p class="mt-4 text-xl text-gray-600">Explorez les saveurs du café de façon interactive</p>
-        </header>
+    <div class="container mx-auto px-4 py-8">
+        <nav class="flex justify-start items-center mb-8 pb-4 border-b-2 border-gray-200">
+            <h1 class="title text-2xl font-bold text-[#6B4226] mr-12"></h1>
+            <a href="#saveurs" class="nav-link text-lg font-semibold py-2 px-4 active" data-page="page-saveurs">La Carte des Saveurs</a>
+            <a href="#recettes" class="nav-link text-lg font-semibold py-2 px-4" data-page="page-recettes">Recettes</a>
+        </nav>
 
-        <div class="max-w-3xl mx-auto">
-            <div id="accordion-container" class="space-y-4">
-
-                <!-- Florales -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-florales">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Florales</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        <!-- Page: La Carte des Saveurs -->
+        <div id="page-saveurs" class="page active">
+            <header class="text-center mb-12">
+                <h2 class="title text-5xl md:text-7xl font-black text-[#6B4226]">La Carte des Saveurs</h2>
+                <p class="mt-4 text-xl text-gray-600">Explorez les saveurs du café de façon interactive</p>
+            </header>
+            <div class="max-w-3xl mx-auto">
+                <div id="accordion-container" class="space-y-4">
+                    <!-- Florales -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-florales">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Florales</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>Fleurs :</strong> Fleur d'oranger, Jasmin, Magnolia, Hibiscus, Lavande, Rose</li>
+                                <li><strong>Herbes :</strong> Houblon, Thé Noir</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong>Fleurs :</strong> Fleur d'oranger, Jasmin, Magnolia, Hibiscus, Lavande, Rose</li>
-                            <li><strong>Herbes :</strong> Houblon, Thé Noir</li>
-                        </ul>
+                     <!-- Épicées -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-epicees">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Épicées</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li>Clou de Girofle, Anis, Curry, Noix de muscade, Gingembre, Coriandre, Cannelle, Poivre Blanc, Poivre Noir</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Fruits -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-fruits">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Fruits</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                               <li><strong>Agrumes:</strong> Citron, Citron Vert, Pamplemousse, Clémentine, Mandarine, Orange</li>
+                               <li><strong>À Noyaux:</strong> Pêche, Nectarine, Abricot, Prune, Cerise, Cerise Noire</li>
+                               <li><strong>Baies:</strong> Cassis, Fraise, Framboise, Myrtille, Groseille, Canneberge</li>
+                               <li><strong>Exotiques:</strong> Litchi, Carambole, Ananas, Mangue, Papaye, Kiwi, Banane</li>
+                               <li><strong>Fruits Secs:</strong> Raisin Sec, Figue Séchée, Datte Séchée, Pruneau</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Sucrées & Chocolats -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-sucrees">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Sucrées & Chocolats</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>Doux:</strong> Miel, Vanille, Nougat, Beurre, Crème</li>
+                                <li><strong>Sucres:</strong> Mélasse, Sirop d'érable, Caramel, Cassonade</li>
+                                <li><strong>Chocolats:</strong> Fèves de Cacao, Chocolat Noir, Poudre de Cacao, Chocolat au Lait</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Noisettes & Céréales -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-noisettes">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Noisettes & Céréales</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>Noisettes:</strong> Amande, Noisette, Noix de Pécan, Noix de Cajou, Noyer</li>
+                                <li><strong>Céréales:</strong> Pain Grillé, Orge, Blé, Seigle, Biscuit, Granola</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Grillées & Terreuses -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-grillees">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Grillées & Terreuses</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>Grillées:</strong> Charbon, Fumé, Cèdre, Bois Frais, Tabac</li>
+                                <li><strong>Terreuses:</strong> Champignon, Courge, Terre</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Végétales & Herbales -->
+                    <div class="accordion-item rounded-lg shadow-md overflow-hidden">
+                        <div class="accordion-item-header p-6 flex justify-between items-center bg-vegetales">
+                            <h3 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Végétales & Herbales</h3>
+                            <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="accordion-item-content">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>Végétales:</strong> Pois Mange-tout, Poivron Vert, Olive, Tomate</li>
+                                <li><strong>Herbales:</strong> Citronnelle, Menthe, Thé Vert, Sauge, Aneth</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Épicées -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-epicees">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Épicées</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Clou de Girofle, Anis, Curry, Noix de muscade, Gingembre, Coriandre, Cannelle, Poivre Blanc, Poivre Noir</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Fruits -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-fruits">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Fruits</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                           <li><strong>Agrumes:</strong> Citron, Citron Vert, Pamplemousse, Clémentine, Mandarine, Orange</li>
-                           <li><strong>À Noyaux:</strong> Pêche, Nectarine, Abricot, Prune, Cerise, Cerise Noire</li>
-                           <li><strong>Baies:</strong> Cassis, Fraise, Framboise, Myrtille, Groseille, Canneberge</li>
-                           <li><strong>Exotiques:</strong> Litchi, Carambole, Ananas, Mangue, Papaye, Kiwi, Banane</li>
-                           <li><strong>Fruits Secs:</strong> Raisin Sec, Figue Séchée, Datte Séchée, Pruneau</li>
-                        </ul>
+        <!-- Page: Recettes -->
+        <div id="page-recettes" class="page">
+            <header class="text-center mb-12">
+                <h2 class="title text-5xl md:text-7xl font-black text-[#6B4226]">Recettes de Café</h2>
+                <p class="mt-4 text-xl text-gray-600">Nos méthodes et paramètres favoris</p>
+            </header>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <!-- Recipe Card 1 -->
+                <div class="recipe-card recipe-border-1 rounded-lg shadow-lg overflow-hidden p-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4" style="font-family: 'Playfair Display', serif;">Pink Bourbon</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg">
+                        <div>
+                            <p class="font-semibold text-gray-500">Grain</p>
+                            <p class="text-2xl font-bold text-gray-800">18g</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-500">Mouture</p>
+                            <p class="text-2xl font-bold text-gray-800">21</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-500">Yield</p>
+                            <p class="text-2xl font-bold text-gray-800">20g</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Sucrées & Chocolats -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-sucrees">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Sucrées & Chocolats</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong>Doux:</strong> Miel, Vanille, Nougat, Beurre, Crème</li>
-                            <li><strong>Sucres:</strong> Mélasse, Sirop d'érable, Caramel, Cassonade</li>
-                            <li><strong>Chocolats:</strong> Fèves de Cacao, Chocolat Noir, Poudre de Cacao, Chocolat au Lait</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Noisettes & Céréales -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-noisettes">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Noisettes & Céréales</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong>Noisettes:</strong> Amande, Noisette, Noix de Pécan, Noix de Cajou, Noyer</li>
-                            <li><strong>Céréales:</strong> Pain Grillé, Orge, Blé, Seigle, Biscuit, Granola</li>
-                        </ul>
+                <!-- Recipe Card 2 -->
+                <div class="recipe-card recipe-border-2 rounded-lg shadow-lg overflow-hidden p-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4" style="font-family: 'Playfair Display', serif;">Columbia</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg">
+                        <div>
+                            <p class="font-semibold text-gray-500">Grain</p>
+                            <p class="text-2xl font-bold text-gray-800">18g</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-500">Mouture</p>
+                            <p class="text-2xl font-bold text-gray-800">21</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-500">Yield</p>
+                            <p class="text-2xl font-bold text-gray-800">20g</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Grillées & Terreuses -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-grillees">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Grillées & Terreuses</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong>Grillées:</strong> Charbon, Fumé, Cèdre, Bois Frais, Tabac</li>
-                            <li><strong>Terreuses:</strong> Champignon, Courge, Terre</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                 <!-- Végétales & Herbales -->
-                <div class="accordion-item rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-item-header p-6 flex justify-between items-center bg-vegetales">
-                        <h2 class="text-2xl font-semibold text-gray-800" style="font-family: 'Playfair Display', serif;">Végétales & Herbales</h2>
-                        <svg class="accordion-icon w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <div class="accordion-item-content">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong>Végétales:</strong> Pois Mange-tout, Poivron Vert, Olive, Tomate</li>
-                            <li><strong>Herbales:</strong> Citronnelle, Menthe, Thé Vert, Sauge, Aneth</li>
-                        </ul>
-                    </div>
-                </div>
-
+                <!-- Add more recipe cards here -->
             </div>
         </div>
     </div>
 
     <script>
-        const accordionItems = document.querySelectorAll('.accordion-item');
+        // --- Page Navigation ---
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
 
+        function switchPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            const newPage = document.getElementById(pageId);
+            if (newPage) {
+                newPage.classList.add('active');
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = e.target.dataset.page;
+                switchPage(pageId);
+                window.location.hash = pageId.replace('page-', '');
+            });
+        });
+
+        // --- Accordion Logic ---
+        const accordionItems = document.querySelectorAll('.accordion-item');
         accordionItems.forEach(item => {
             const header = item.querySelector('.accordion-item-header');
             header.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                // Option to close all others when one is opened
-                // accordionItems.forEach(i => {
-                //     i.classList.remove('active');
-                // });
                 if (isActive) {
                     item.classList.remove('active');
                 } else {
@@ -187,6 +285,11 @@
                 }
             });
         });
+
+        // Set initial page based on URL hash
+        const initialPage = window.location.hash.replace('#', 'page-') || 'page-saveurs';
+        switchPage(initialPage);
+
     </script>
 
 </body>
